@@ -17,6 +17,7 @@ BuildRequires:	fontconfig-devel
 BuildRequires:	ftgl-devel >= 2.1.2
 BuildRequires:	gettext-devel
 BuildRequires:	lcms-devel >= 1.14
+BuildRequires:	libXcm-devel
 BuildRequires:	libpng-devel
 BuildRequires:	libtiff-devel
 BuildRequires:	oyranos-devel
