@@ -1,0 +1,20 @@
+--- icc_examin-0.54/icc_gl.cpp.orig	2013-03-31 18:11:39.612986049 +0200
++++ icc_examin-0.54/icc_gl.cpp	2013-03-31 18:16:23.989646789 +0200
+@@ -871,7 +871,7 @@
+   if(font) delete font;
+   if(ortho_font) delete ortho_font;
+ 
+-  const char* font_name = "/usr/share/fonts/dejavu/DejaVuSans.ttf";
++  const char* font_name = "/usr/share/fonts/TTF/DejaVuSans.ttf";
+ 
+ # ifdef HAVE_FONTCONFIG
+   FcResult r = FcResultMatch;
+@@ -915,7 +915,7 @@
+ # endif
+   if(!holeDateiModifikationsZeit(font_name)) {
+     DBG_PROG_S( _("Could not open font in:") << font_name )
+-    font_name = "/usr/share/fonts/truetype/DejaVuSans.ttf";
++    font_name = "/usr/share/fonts/TTF/DejaVuSans.ttf";
+     if(!holeDateiModifikationsZeit(font_name)) {
+       DBG_PROG_S( _("Could not open font in:") << font_name )
+ #ifdef  WIN32
