@@ -9,6 +9,7 @@ Source0:	http://downloads.sourceforge.net/oyranos/%{name}-%{version}.tar.bz2
 # Source0-md5:	4add0302cc7978549335f507d711605c
 Patch0:		%{name}-configure.patch
 Patch1:		%{name}-paths.patch
+Patch2:		%{name}-pld.patch
 URL:		http://www.oyranos.org/icc-examin
 BuildRequires:	OpenGL-GLU-devel
 BuildRequires:	fltk-devel >= 1.1.4
@@ -46,6 +47,7 @@ tablic gamma kart graficznych.
 %setup -q
 %patch0 -p1
 %patch1 -p1
+%patch2 -p1
 
 %build
 export CC="%{__cc}"
