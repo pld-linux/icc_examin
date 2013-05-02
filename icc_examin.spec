@@ -27,9 +27,8 @@ BuildRequires:	xorg-lib-libXinerama-devel
 BuildRequires:	xorg-lib-libXxf86vm-devel
 Requires:	fltk >= 1.1.4
 # DejaVuSans.ttf
-Requires:	fonts-TTF-dejavu
+Requires:	fonts-TTF-DejaVu
 Requires:	ftgl >= 2.1.2
-Requires:	ftgl-gl >= 2.1.2
 Requires:	lcms >= 1.14
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
