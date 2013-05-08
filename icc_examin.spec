@@ -2,7 +2,7 @@ Summary:	X Color Management tools
 Summary(pl.UTF-8):	Narzędzia X Color Management (do zarządzania kolorami w X)
 Name:		icc_examin
 Version:	0.54
-Release:	1
+Release:	2
 License:	MIT
 Group:		X11/Applications/Graphics
 Source0:	http://downloads.sourceforge.net/oyranos/%{name}-%{version}.tar.bz2
