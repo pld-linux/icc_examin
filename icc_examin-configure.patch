@@ -1,5 +1,5 @@
---- icc_examin-0.54/configure_tests.sh.orig	2012-12-20 18:38:30.459364279 +0100
-+++ icc_examin-0.54/configure_tests.sh	2013-03-31 14:50:55.109904248 +0200
+--- icc_examin-0.55/configure_tests.sh.orig	2013-05-02 13:10:35.207244645 +0200
++++ icc_examin-0.55/configure_tests.sh	2014-03-16 18:28:08.829359193 +0100
 @@ -529,6 +529,7 @@
  
  if [ -n "$XCM" ] && [ $XCM -gt 0 ]; then
@@ -8,58 +8,17 @@
      version=""
      pc_package=xcm
      name="xcm"
-@@ -543,7 +544,8 @@
-     if [ -z "$found" ]; then
-       pkg-config  --atleast-version=0.2 $pc_package
-       if [ $? = 0 ]; then
--        found=`pkg-config --cflags $pc_package`
-+	found=yes
-+        cflags=`pkg-config --cflags $pc_package`
-         version=`pkg-config --modversion $pc_package`
-       fi
-     fi
-@@ -557,7 +559,7 @@
-       if [ -n "$MAKEFILE_DIR" ]; then
-         for i in $MAKEFILE_DIR; do
-           test -f "$ROOT_DIR/$i/makefile".in && echo "XCM = 1" >> "$i/makefile"
--          test -f "$ROOT_DIR/$i/makefile".in && echo "XCM_H = $found" >> "$i/makefile"
-+          test -f "$ROOT_DIR/$i/makefile".in && echo "XCM_H = $cflags" >> "$i/makefile"
-           test -f "$ROOT_DIR/$i/makefile".in && echo "$ID_LIBS = `pkg-config --libs $name | sed \"$STRIPOPT\"`" >> "$i/makefile"
-         done
-       fi
-@@ -575,22 +577,27 @@
- 
- if [ -n "$X11" ] && [ $X11 -gt 0 ]; then
-     found=""
-+    cflags=""
-     version=""
-     pc_package=x11
+@@ -581,7 +582,8 @@
      if [ -z "$found" ]; then
        pkg-config  --atleast-version=1.0 $pc_package
        if [ $? = 0 ]; then
 -        found=`pkg-config --cflags $pc_package`
-+        found=yes
++	found=yes
 +        cflags=`pkg-config --cflags $pc_package`
          version=`pkg-config --modversion $pc_package`
        fi
      fi
-     if [ -z "$found" ]; then
-       if [ -f /usr/X11R6/include/X11/Xlib.h ]; then
--        found="-I/usr/X11R6/include"
-+        cflags="-I/usr/X11R6/include"
-+	found=yes
-       elif [ -f /usr/include/X11/Xlib.h ]; then
--        found="-I/usr/include"
-+        cflags="-I/usr/include"
-+	found=yes
-       elif [ -f $includedir/X11/Xlib.h ]; then
--        found="-I$includedir"
-+        cflags="-I$includedir"
-+	found=yes
-       fi
-     fi
-     if [ -z "$found" ] && [ $OSUNAME = "Linux" ]; then
-@@ -603,22 +610,27 @@
+@@ -604,22 +606,27 @@
  if [ -n "$X11" ] && [ $X11 -gt 0 ]; then
    if [ -n "$XF86VMODE" ] && [ $XF86VMODE -gt 0 ]; then
      found=""
@@ -78,20 +37,20 @@
      if [ -z "$found" ]; then
        if [ -f /usr/X11R6/include/X11/extensions/xf86vmode.h ]; then
 -        found="-I/usr/X11R6/include"
++        found=yes
 +        cflags="-I/usr/X11R6/include"
-+	found=yes
        elif [ -f /usr/include/X11/extensions/xf86vmode.h ]; then
 -        found="-I/usr/include"
++        found=yes
 +        cflags="-I/usr/include"
-+	found=yes
        elif [ -f $includedir/X11/extensions/xf86vmode.h ]; then
 -        found="-I$includedir"
++        found=yes
 +        cflags="-I$includedir"
-+	found=yes
        fi
      fi
      if [ -n "$found" ]; then
-@@ -631,7 +643,7 @@
+@@ -632,7 +639,7 @@
        if [ -n "$MAKEFILE_DIR" ]; then
          for i in $MAKEFILE_DIR; do
            test -f "$ROOT_DIR/$i/makefile".in && echo "XF86VMODE = 1" >> "$i/makefile"
@@ -100,12 +59,11 @@
          done
        fi
      elif [ $OSUNAME = "Linux" ]; then
-@@ -642,23 +654,28 @@
-   fi
+@@ -644,22 +651,27 @@
  
    if [ -n "$XINERAMA" ] && [ $XINERAMA -gt 0 ]; then
-+    cflags=""
      found=""
++    cflags=""
      version=""
      pc_package=xinerama
      if [ -z "$found" ]; then
@@ -120,20 +78,20 @@
      if [ -z "$found" ]; then
        if [ -f /usr/X11R6/include/X11/extensions/Xinerama.h ]; then
 -        found="-I/usr/X11R6/include"
++        found=yes
 +        cflags="-I/usr/X11R6/include"
-+	found=yes
        elif [ -f /usr/include/X11/extensions/Xinerama.h ]; then
 -        found="-I/usr/include"
++        found=yes
 +        cflags="-I/usr/include"
-+	found=yes
        elif [ -f $includedir/X11/extensions/Xinerama.h ]; then
 -        found="-I$includedir"
++        found=yes
 +        cflags="-I$includedir"
-+	found=yes
        fi
      fi
      if [ -n "$found" ]; then
-@@ -671,7 +688,7 @@
+@@ -672,7 +684,7 @@
        if [ -n "$MAKEFILE_DIR" ]; then
          for i in $MAKEFILE_DIR; do
            test -f "$ROOT_DIR/$i/makefile".in && echo "XIN = 1" >> "$i/makefile"
@@ -142,7 +100,7 @@
          done
        fi
      elif [ $OSUNAME = "Linux" ]; then
-@@ -683,12 +700,14 @@
+@@ -684,12 +696,14 @@
  
    if [ -n "$XRANDR" ] && [ $XRANDR -gt 0 ]; then
      found=""
@@ -158,7 +116,7 @@
          version=`pkg-config --modversion $pc_package`
        fi
      fi
-@@ -702,7 +721,7 @@
+@@ -703,7 +717,7 @@
        if [ -n "$MAKEFILE_DIR" ]; then
          for i in $MAKEFILE_DIR; do
            test -f "$ROOT_DIR/$i/makefile".in && echo "XRANDR = 1" >> "$i/makefile"
@@ -167,7 +125,7 @@
          done
        fi
      elif [ $OSUNAME = "Linux" ]; then
-@@ -840,22 +859,27 @@
+@@ -841,22 +855,27 @@
  fi
  if [ -n "$X11" ] && [ $X11 -gt 0 ]; then
      found=""
@@ -199,7 +157,7 @@
        fi
      fi
      if [ -n "$found" ]; then
-@@ -868,7 +892,7 @@
+@@ -869,7 +888,7 @@
        if [ -n "$MAKEFILE_DIR" ]; then
          for i in $MAKEFILE_DIR; do
            test -f "$ROOT_DIR/$i/makefile".in && echo "X11 = X11" >> "$i/makefile"

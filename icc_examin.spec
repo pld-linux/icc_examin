@@ -1,12 +1,12 @@
 Summary:	X Color Management tools
 Summary(pl.UTF-8):	Narzędzia X Color Management (do zarządzania kolorami w X)
 Name:		icc_examin
-Version:	0.54
-Release:	2
+Version:	0.55
+Release:	1
 License:	MIT
 Group:		X11/Applications/Graphics
 Source0:	http://downloads.sourceforge.net/oyranos/%{name}-%{version}.tar.bz2
-# Source0-md5:	4add0302cc7978549335f507d711605c
+# Source0-md5:	51ba3b849eb47793974cab6956750cf0
 Patch0:		%{name}-configure.patch
 Patch1:		%{name}-paths.patch
 Patch2:		%{name}-pld.patch
@@ -21,7 +21,7 @@ BuildRequires:	lcms-devel >= 1.14
 BuildRequires:	libXcm-devel
 BuildRequires:	libpng-devel
 BuildRequires:	libtiff-devel
-BuildRequires:	oyranos-devel
+BuildRequires:	oyranos-devel >= 0.9.5
 BuildRequires:	xorg-lib-libX11-devel
 BuildRequires:	xorg-lib-libXinerama-devel
 BuildRequires:	xorg-lib-libXxf86vm-devel
@@ -30,6 +30,7 @@ Requires:	fltk >= 1.1.4
 Requires:	fonts-TTF-DejaVu
 Requires:	ftgl >= 2.1.2
 Requires:	lcms >= 1.14
+Requires:	oyranos-libs >= 0.9.5
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %description
