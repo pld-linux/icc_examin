@@ -16,7 +16,7 @@ BuildRequires:	fltk-devel >= 1.1.4
 BuildRequires:	fltk-gl-devel >= 1.1.4
 BuildRequires:	fontconfig-devel
 BuildRequires:	ftgl-devel >= 2.1.2
-BuildRequires:	gettext-devel
+BuildRequires:	gettext-tools
 BuildRequires:	lcms-devel >= 1.14
 BuildRequires:	libXcm-devel
 BuildRequires:	libpng-devel
