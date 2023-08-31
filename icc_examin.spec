@@ -1,17 +1,24 @@
+#
+# Conditional build:
+%bcond_with	cinepaint	# CinePaint plugin (currently built from cinepaint.spec)
+
 Summary:	X Color Management tools
 Summary(pl.UTF-8):	Narzędzia X Color Management (do zarządzania kolorami w X)
 Name:		icc_examin
-Version:	0.55
+Version:	0.56
 Release:	1
 License:	MIT
 Group:		X11/Applications/Graphics
-Source0:	http://downloads.sourceforge.net/oyranos/%{name}-%{version}.tar.bz2
-# Source0-md5:	51ba3b849eb47793974cab6956750cf0
+#Source0Download: https://github.com/oyranos-cms/icc-examin/releases
+Source0:	https://github.com/oyranos-cms/icc-examin/archive/%{version}/icc-examin-%{version}.tar.gz
+# Source0-md5:	079b3d4babf6c981d11cc0e30eb6307f
 Patch0:		%{name}-configure.patch
 Patch1:		%{name}-paths.patch
 Patch2:		%{name}-pld.patch
-URL:		http://www.oyranos.org/icc-examin
+#URL:		http://www.oyranos.org/icc-examin
+URL:		https://github.com/oyranos-cms/icc-examin
 BuildRequires:	OpenGL-GLU-devel
+%{?with_cinepaint:BuildRequires:	cinepaint-devel >= 0.2.20}
 BuildRequires:	fltk-devel >= 1.1.4
 BuildRequires:	fltk-gl-devel >= 1.1.4
 BuildRequires:	fontconfig-devel
@@ -44,7 +51,7 @@ ICC, danych pomiarowych (CGATS), wizualizacji VRML gam argylla oraz
 tablic gamma kart graficznych.
 
 %prep
-%setup -q
+%setup -q -n icc-examin-%{version}
 %patch0 -p1
 %patch1 -p1
 %patch2 -p1
@@ -58,29 +65,31 @@ export LDFLAGS="%{rpmldflags}"
 # NOTE: not autoconf configure, but mostly compatible
 %configure
 
-%{__make}
+%{__make} \
+	%{!?with_cinepaint:CINEPAINT=}
 
 %install
 rm -rf $RPM_BUILD_ROOT
 
 %{__make} install \
-	DESTDIR=$RPM_BUILD_ROOT
+	DESTDIR=$RPM_BUILD_ROOT \
+	%{!?with_cinepaint:CINEPAINT= INSTALL_TARGET=install_global}
 
 # system DejaVuSans.ttf is used instead
 %{__rm} $RPM_BUILD_ROOT%{_fontsdir}/FreeSans.ttf
 
 # fix location of themable icon
 install -d $RPM_BUILD_ROOT%{_iconsdir}
-mv $RPM_BUILD_ROOT%{_pixmapsdir}/hicolor $RPM_BUILD_ROOT%{_iconsdir}
+%{__mv} $RPM_BUILD_ROOT%{_pixmapsdir}/hicolor $RPM_BUILD_ROOT%{_iconsdir}
 
-%find_lang icc_examin
+%find_lang icc-examin
 
 %clean
 rm -rf $RPM_BUILD_ROOT
 
-%files -f icc_examin.lang
+%files -f icc-examin.lang
 %defattr(644,root,root,755)
-%doc AUTHORS BUGS ChangeLog README TODO
+%doc AUTHORS BUGS ChangeLog.md README.md TODO
 %attr(755,root,root) %{_bindir}/iccexamin
 %{_desktopdir}/iccexamin.desktop
 %{_pixmapsdir}/iccexamin.png

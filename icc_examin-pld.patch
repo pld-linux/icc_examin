@@ -1,6 +1,6 @@
---- icc_examin-0.54/configure.orig	2013-01-11 12:55:26.676880980 +0100
-+++ icc_examin-0.54/configure	2013-03-31 21:11:35.026149419 +0200
-@@ -345,6 +345,11 @@
+--- icc-examin-0.56/configure.orig	2016-12-09 23:50:43.000000000 +0100
++++ icc-examin-0.56/configure	2023-08-28 06:26:29.924434276 +0200
+@@ -346,6 +346,11 @@ else
        test -n $ECHO && $ECHO $e "$echo_" >> $CONF_LOG; test -n "$INFOECHO" && $INFOECHO "$echo_"
          DISTNAME="$echo_"
        SYS=1; fi
@@ -12,7 +12,7 @@
      if [ -f /etc/debian_version ]; then
        if [ -f /etc/issue.net ]; then
          echo_="`cat /etc/issue.net || cat /etc/debian_version`"
-@@ -352,10 +357,7 @@
+@@ -353,11 +358,8 @@ else
          DISTNAME="$echo_"
          SYS=2; fi; fi
      if [ $SYS -eq 0 ]; then
@@ -21,7 +21,8 @@
 -        test -n $ECHO && $ECHO $e "$echo_" >> $CONF_LOG; test -n "$INFOECHO" && $INFOECHO "$echo_"
 -        DISTNAME="$echo_"
 -    fi; fi
-+      DISTNAME="Linux"
++        DISTNAME="Linux"
 +    fi
      OSUNAME=Linux
    else
+     if [ $UNAME_ = "SunOS" ]; then
