@@ -15,6 +15,7 @@ Source0:	https://github.com/oyranos-cms/icc-examin/archive/%{version}/icc-examin
 Patch0:		%{name}-configure.patch
 Patch1:		%{name}-paths.patch
 Patch2:		%{name}-pld.patch
+Patch3:		%{name}-ptr.patch
 #URL:		http://www.oyranos.org/icc-examin
 URL:		https://github.com/oyranos-cms/icc-examin
 BuildRequires:	OpenGL-GLU-devel
@@ -28,7 +29,7 @@ BuildRequires:	lcms-devel >= 1.14
 BuildRequires:	libXcm-devel
 BuildRequires:	libpng-devel
 BuildRequires:	libtiff-devel
-BuildRequires:	oyranos-devel >= 0.9.5
+BuildRequires:	oyranos-devel >= 0.9.6
 BuildRequires:	xorg-lib-libX11-devel
 BuildRequires:	xorg-lib-libXinerama-devel
 BuildRequires:	xorg-lib-libXxf86vm-devel
@@ -37,7 +38,7 @@ Requires:	fltk >= 1.1.4
 Requires:	fonts-TTF-DejaVu
 Requires:	ftgl >= 2.1.2
 Requires:	lcms >= 1.14
-Requires:	oyranos-libs >= 0.9.5
+Requires:	oyranos-libs >= 0.9.6
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %description
@@ -55,6 +56,7 @@ tablic gamma kart graficznych.
 %patch0 -p1
 %patch1 -p1
 %patch2 -p1
+%patch3 -p1
 
 %build
 export CC="%{__cc}"
